@@ -352,11 +352,11 @@ class TestSP(unittest.TestCase):
         from gpkit.tools import determine_unbounded_variables
         x = Variable("x")
         y = Variable("y")
-        m = Model(x*y, [x*y**1.000001 >= 12])
+        m = Model(x*y, [x*y**1.000001 >= 100])
         self.assertRaises((RuntimeWarning, ValueError), m.solve, verbosity=0)
         bounds = determine_unbounded_variables(m)
-        self.assertEqual(bounds, {"pushing up": [y.key],
-                                  "pushing down": [x.key]})
+        self.assertEqual(bounds["sensitive to upper bound"], [y.key])
+        self.assertEqual(bounds["sensitive to lower bound"], [x.key])
 
 
 TEST_CASES = [TestGP, TestSP]
