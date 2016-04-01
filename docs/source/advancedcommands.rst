@@ -280,3 +280,23 @@ Example Usage
 When using the ``localsolve`` method, the ``reltol`` argument specifies the relative tolerance of the solver: that is, by what percent does the solution have to improve between iterations? If any iteration improves less than that amount, the solver stops and returns its value.
 
 If you wish to start the local optimization at a particular point :math:`x_k`, however, you may do so by putting that position (a dictionary formatted as you would a substitution) as the ``xk`` argument.
+
+Debugging
+=========
+
+Unbounded variables
+-------------------
+In some cases a solver will return ``unknown`` when a free variable is
+unbounded by the model. ``gpkit.tools.determine_unbounded_variables`` is a
+simple tool that attempts to detect unbounded variables by adding extremely
+large upper bounds and extremely small lower bounds to all variables in a model,
+resolving, and checking whether any variables slide off to the bounds.
+Mosek returns unknown when attempting to solve the following model:
+
+.. literalinclude:: examples/unbounded.py
+
+Upon viewing the output from ``determine_unbounded_variables``,
+
+.. literalinclude:: examples/unbounded_output.txt
+
+it becomes clear that ``A`` is unbounded below in the original model.
