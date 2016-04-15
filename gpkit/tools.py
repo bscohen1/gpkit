@@ -69,7 +69,6 @@ def te_secant(x, nterm):
     factorial_denom = 1
     for i in range(1, nterm + 1):
         factorial_denom *= ((2*i)*(2*i-1))
-        print factorial_denom
         res +=  E2n[i-1]/ factorial_denom * x**(2*i)
     return res
 
