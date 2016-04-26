@@ -796,3 +796,5 @@ class SignomialEqualityLin(ScalarSingleEquationConstraint):
 
 # pylint: disable=wrong-import-position
 from .substitution import substitution, parse_subs
+
+# This is an edit from bscohen1
